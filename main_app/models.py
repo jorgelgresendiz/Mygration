@@ -13,7 +13,7 @@ class Residence(models.Model):
     longitude = models.FloatField()
     start_date = models.DateField()
     end_date = models.DateField()
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Workplace(models.Model):
@@ -29,7 +29,7 @@ class Workplace(models.Model):
     employer_number = models.IntegerField()
     employer_email = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 # class FunPlace(models.Model):
 #     address_line_1 = models.CharField(max_length=100)
