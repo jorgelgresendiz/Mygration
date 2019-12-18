@@ -6,6 +6,8 @@ import json
 from .models import Residence, Workplace
 
 
+# ---------------------- Generic Views ---------------------------
+
 def home(request):
     return render(request, 'index.html')
 
