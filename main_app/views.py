@@ -12,8 +12,16 @@ def home(request):
 class ResidenceList(ListView):
     model = Residence
 
+
+class ResidenceDetail(DetailView):
+    model = Residence
+
 # ---------------------- Workplace Views -------------------------
 
 
 class WorkplaceList(ListView):
+    model = Workplace
+
+
+class WorkplaceDetail(DetailView):
     model = Workplace
