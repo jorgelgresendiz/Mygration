@@ -121,5 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_REDIRECT_URL = '/residences/'
+
+LOGOUT_REDIRECT_URL = '/'
+
 environ.Env()
 environ.Env.read_env()
