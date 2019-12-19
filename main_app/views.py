@@ -3,7 +3,10 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+<<<<<<< HEAD
+=======
 
+>>>>>>> 82cd5121e39e5adc979020fd84f33a9842f73efd
 import os
 import requests
 import json
@@ -64,8 +67,13 @@ def create_residence(request):
 def workplaces_index(request):
     workplace = Workplace.objects.filter(user=request.user)
     return render(request, 'workplaces/workplaces_index.html', {'workplace': workplace})
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 82cd5121e39e5adc979020fd84f33a9842f73efd
 @login_required
 def workplace_detail(request, workplace_id):
     workplace = Workplace.objects.get(id=workplace_id)
@@ -73,7 +81,12 @@ def workplace_detail(request, workplace_id):
         'workplace': workplace})
 
 
+@login_required
 def create_workplace(request):
+<<<<<<< HEAD
+    pass
+
+=======
 	new_workplace = Workplace.create()
 	workplace_input = request.POST
 	street_1 = workplace_input.street1
@@ -105,6 +118,7 @@ def create_workplace(request):
 	print(f'Saving new workplace: {new_workplace}')
 	return redirect('workplaces/')
    
+>>>>>>> 82cd5121e39e5adc979020fd84f33a9842f73efd
 
 # ---------------------- Auth Views -------------------------
 
@@ -120,5 +134,9 @@ def signup(request):
       error_message = 'Invalid sign up - try again'
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
+<<<<<<< HEAD
+  return render(request, 'registration/signup.html', context)
+=======
   return render(request, 'registration/signup.html', context)
 
+>>>>>>> 82cd5121e39e5adc979020fd84f33a9842f73efd
