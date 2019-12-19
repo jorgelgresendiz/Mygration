@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 import os
 import requests
@@ -38,7 +39,7 @@ def create_residence(request):
 	end_date = input_address.end_date
 	city = input_address.city
 	state = input_address.state
-	request_string = f'https://us-street.api.smartystreets.com/street-address?auth-id={os.environ['SS_AUTH_ID']}&auth-token={os.environ['SS_AUTH_TOKEN']}&street={street_1_formatted}&street2=&city={city}&state={state}&zipcode=&address-type=us-street-components'
+	request_string = f"https://us-street.api.smartystreets.com/street-address?auth-id={os.environ['SS_AUTH_ID']}&auth-token={os.environ['SS_AUTH_TOKEN']}&street={street_1_formatted}&street2=&city={city}&state={state}&zipcode=&address-type=us-street-components"
 	unparsed_formatted_address = requests.get(request_string)
 	parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
