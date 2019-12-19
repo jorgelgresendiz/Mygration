@@ -14,6 +14,9 @@ from .models import Residence, Workplace
 def home(request):
     return render(request, 'index.html')
 
+def create_form(request):
+    return render(request, 'create_residence.html')
+
 # ---------------------- Residence Views -------------------------
 
 @login_required
@@ -30,11 +33,11 @@ def residence_detail(request, residence_id):
     
 @login_required
 def create_residence(request):
-	new_residence = Residence.create()
+	new_residence = Residence()
 	input_address = request.POST
-	street_1 = input_address.street1
+	street_1 = input_address.address_line_1
 	street_1_formatted = street_1.replace(' ', '%20')
-	street_2 = input_address.street2
+	street_2 = input_address.address_line_2
 	start_date = input_address.start_date
 	end_date = input_address.end_date
 	city = input_address.city

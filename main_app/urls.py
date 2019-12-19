@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     # Generic routes -----------------------------------
     path('', views.home, name='home'),
+    path('residences/create_form/', views.create_form, name='create_form'), # renders create form
 
     # Residence routes ---------------------------------
     path('residences/', views.residences_index,
