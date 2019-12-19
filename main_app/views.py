@@ -74,7 +74,7 @@ def workplace_detail(request, workplace_id):
 
 
 def create_workplace(request):
-	new_residence = Residence.create()
+	new_workplace = Workplace.create()
 	input_address = request.POST
 	street_1 = input_address.street1
 	street_1_formatted = street_1.replace(' ', '%20')
@@ -87,25 +87,17 @@ def create_workplace(request):
 	unparsed_formatted_address = requests.get(request_string)
 	parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
-	new_residence.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
-	new_residence.address_line_2 = street_2
-	new_residence.city = parsed_formatted_address[0]['components']['city_name']
-	new_residence.state = parsed_formatted_address[0]['components']['state_abbreviation']
-	new_residence.latitude = parsed_formatted_address[0]['metadata']['latitude']
-	new_residence.longitude = parsed_formatted_address[0]['metadata']['longitude']
-	new_residence.start_date = start_date
-	new_residence.end_date = end_date
-	new_residence.save()
-	return redirect('residences/')
+	new_workplace.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
+	new_workplace.address_line_2 = street_2
+	new_workplace.city = parsed_formatted_address[0]['components']['city_name']
+	new_workplace.state = parsed_formatted_address[0]['components']['state_abbreviation']
+	new_workplace.latitude = parsed_formatted_address[0]['metadata']['latitude']
+	new_workplace.longitude = parsed_formatted_address[0]['metadata']['longitude']
+	new_workplace.start_date = start_date
+	new_workplace.end_date = end_date
+	new_workplace.save()
+	return redirect('workplaces/')
     
-    
-# ---------------------- Workplace Views -------------------------
-
-
-@login_required
-def create_workplace(request):
-    pass
-
 
 # ---------------------- Auth Views -------------------------
 
