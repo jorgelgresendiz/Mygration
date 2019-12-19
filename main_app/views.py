@@ -3,7 +3,6 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-
 import os
 import requests
 import json
@@ -73,6 +72,7 @@ def workplace_detail(request, workplace_id):
         'workplace': workplace})
 
 
+@login_required
 def create_workplace(request):
 	new_workplace = Workplace.create()
 	workplace_input = request.POST
