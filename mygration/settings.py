@@ -123,7 +123,3 @@ STATIC_URL = '/static/'
 
 environ.Env()
 environ.Env.read_env()
-
-# adding for using secret config vars in django
-environ.Env()
-environ.Env.read_env()
