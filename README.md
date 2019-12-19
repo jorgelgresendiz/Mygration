@@ -2,13 +2,28 @@
 
 ## Introduction
 
-![Example View]()
+Mygration is an application that allows users to create and access the contact information for previous residences and workplaces. In addition to being a useful resource for organizational purpose, Mygration highlights your journey in an increasingly migrant America.
+
+<!-- ![Example View]() -->
 
 ### Deployed Link:
 
 [Mygration]()
 
 ## Technologies
+
+- HTML/CSS/JS
+- Python
+- Django
+- Postgresql
+- Git/Github
+
+### Third Party APIs:
+
+- Google Static Maps 
+- Google Maps Routes
+- Google Streetview Static
+- Smartystreets Single Address Verification
 
 ## Planning
 

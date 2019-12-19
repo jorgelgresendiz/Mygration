@@ -3,6 +3,10 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+<<<<<<< HEAD
+=======
+
+>>>>>>> 82cd5121e39e5adc979020fd84f33a9842f73efd
 import os
 import requests
 import json
@@ -63,8 +67,13 @@ def create_residence(request):
 def workplaces_index(request):
     workplace = Workplace.objects.filter(user=request.user)
     return render(request, 'workplaces/workplaces_index.html', {'workplace': workplace})
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 82cd5121e39e5adc979020fd84f33a9842f73efd
 @login_required
 def workplace_detail(request, workplace_id):
     workplace = Workplace.objects.get(id=workplace_id)
@@ -74,8 +83,42 @@ def workplace_detail(request, workplace_id):
 
 @login_required
 def create_workplace(request):
+<<<<<<< HEAD
     pass
 
+=======
+	new_workplace = Workplace.create()
+	workplace_input = request.POST
+	street_1 = workplace_input.street1
+	street_1_formatted = street_1.replace(' ', '%20')
+	street_2 = workplace_input.street2
+	start_date = workplace_input.start_date
+	end_date = workplace_input.end_date
+	city = workplace_input.city
+	state = workplace_input.state
+	request_string = f"https://us-street.api.smartystreets.com/street-address?auth-id={os.environ['SS_AUTH_ID']}&auth-token={os.environ['SS_AUTH_TOKEN']}&street={street_1_formatted}&street2=&city={city}&state={state}&zipcode=&address-type=us-street-components"
+	unparsed_formatted_address = requests.get(request_string)
+	parsed_formatted_address = json.loads(
+        unparsed_formatted_address.content)
+	new_workplace.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
+	new_workplace.address_line_2 = street_2
+	new_workplace.city = parsed_formatted_address[0]['components']['city_name']
+	new_workplace.state = parsed_formatted_address[0]['components']['state_abbreviation']
+	new_workplace.latitude = parsed_formatted_address[0]['metadata']['latitude']
+	new_workplace.longitude = parsed_formatted_address[0]['metadata']['longitude']
+	new_workplace.start_date = start_date
+	new_workplace.end_date = end_date
+	new_workplace.company_name = workplace_input.company_name
+	new_workplace.employer_name = workplace_input.employer_name
+	new_workplace.employer_number = workplace_input.employer_number
+	new_workplace.employer_email = workplace_input.employer_email
+	new_workplace.employer_email = workplace_input.employer_email
+	new_workplace.title = workplace_input.title
+	new_workplace.save()
+	print(f'Saving new workplace: {new_workplace}')
+	return redirect('workplaces/')
+   
+>>>>>>> 82cd5121e39e5adc979020fd84f33a9842f73efd
 
 # ---------------------- Auth Views -------------------------
 
@@ -91,4 +134,9 @@ def signup(request):
       error_message = 'Invalid sign up - try again'
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
+<<<<<<< HEAD
   return render(request, 'registration/signup.html', context)
+=======
+  return render(request, 'registration/signup.html', context)
+
+>>>>>>> 82cd5121e39e5adc979020fd84f33a9842f73efd
