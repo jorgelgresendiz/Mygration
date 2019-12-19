@@ -18,9 +18,15 @@
             <div class="nav-wrapper">
               <a href="/" class="brand-logo">Mygration</a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/allhomes/"">View Homes</a></li>
-                <li><a href="/allworkplaces">View Work Places</a></li>
-                <li><a href="/addplace">Add Place</a></li>
+                {% if user.is_authenticated %}
+                  <li><a href="/residences/"">View Homes</a></li>
+                  <li><a href="/workplaces">View Work Places</a></li>
+                  <li><a href="/residences/create">Add Place</a></li>
+                  <li><a href="{% url 'logout' %}">Log Out</a></li>
+                {% else %}
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                  <li><a href="{% url 'login' %}">Log In</a></li>
+                {% endif %}
               </ul>
             </div>
           </nav>
