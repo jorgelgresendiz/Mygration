@@ -73,49 +73,40 @@ def workplace_detail(request, workplace_id):
         'workplace': workplace})
 
 
-def create_residence(request):
-	new_residence = Residence.create()
-	input_address = request.POST
-	street_1 = input_address.street1
+def create_workplace(request):
+	new_workplace = Workplace.create()
+	workplace_input = request.POST
+	street_1 = workplace_input.street1
 	street_1_formatted = street_1.replace(' ', '%20')
-	street_2 = input_address.street2
-	start_date = input_address.start_date
-	end_date = input_address.end_date
-	city = input_address.city
-	state = input_address.state
-	request_string = f'https://us-street.api.smartystreets.com/street-address?auth-id={os.environ['SS_AUTH_ID']}&auth-token={os.environ['SS_AUTH_TOKEN']}&street={street_1_formatted}&street2=&city={city}&state={state}&zipcode=&address-type=us-street-components'
+	street_2 = workplace_input.street2
+	start_date = workplace_input.start_date
+	end_date = workplace_input.end_date
+	city = workplace_input.city
+	state = workplace_input.state
+	request_string = f"https://us-street.api.smartystreets.com/street-address?auth-id={os.environ['SS_AUTH_ID']}&auth-token={os.environ['SS_AUTH_TOKEN']}&street={street_1_formatted}&street2=&city={city}&state={state}&zipcode=&address-type=us-street-components"
 	unparsed_formatted_address = requests.get(request_string)
 	parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
-	new_residence.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
-	new_residence.address_line_2 = street_2
-	new_residence.city = parsed_formatted_address[0]['components']['city_name']
-	new_residence.state = parsed_formatted_address[0]['components']['state_abbreviation']
-	new_residence.latitude = parsed_formatted_address[0]['metadata']['latitude']
-	new_residence.longitude = parsed_formatted_address[0]['metadata']['longitude']
-	new_residence.start_date = start_date
-	new_residence.end_date = end_date
-	new_residence.save()
-	return redirect('residences/')
-    
-    
-# ---------------------- Workplace Views -------------------------
-
-
-@login_required
-def create_workplace(request):
-    pass
-
+	new_workplace.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
+	new_workplace.address_line_2 = street_2
+	new_workplace.city = parsed_formatted_address[0]['components']['city_name']
+	new_workplace.state = parsed_formatted_address[0]['components']['state_abbreviation']
+	new_workplace.latitude = parsed_formatted_address[0]['metadata']['latitude']
+	new_workplace.longitude = parsed_formatted_address[0]['metadata']['longitude']
+	new_workplace.start_date = start_date
+	new_workplace.end_date = end_date
+	new_workplace.company_name = workplace_input.company_name
+	new_workplace.employer_name = workplace_input.employer_name
+	new_workplace.employer_number = workplace_input.employer_number
+	new_workplace.employer_email = workplace_input.employer_email
+	new_workplace.employer_email = workplace_input.employer_email
+	new_workplace.title = workplace_input.title
+	new_workplace.save()
+	print(f'Saving new workplace: {new_workplace}')
+	return redirect('workplaces/')
+   
 
 # ---------------------- Auth Views -------------------------
-
-
-class WorkplaceDetail(DetailView):
-    model = Workplace
-
-
-def create_workplace(request):
-    pass
 
 def signup(request):
   error_message = ''
