@@ -121,9 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-environ.Env()
-environ.Env.read_env()
+LOGIN_REDIRECT_URL = '/residences/'
 
-# adding for using secret config vars in django
+LOGOUT_REDIRECT_URL = '/'
+
 environ.Env()
 environ.Env.read_env()
