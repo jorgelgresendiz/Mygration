@@ -15,7 +15,7 @@ def home(request):
     return render(request, 'index.html')
 
 def create_form(request):
-    return render(request, create_residence)
+    return render(request, 'create_residence.html')
 
 # ---------------------- Residence Views -------------------------
 
