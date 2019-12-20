@@ -56,6 +56,8 @@ STATES = (
     ('WY', 'Wyoming')
 )
 
+# ---------------------- Residence Model ---------------------------
+
 
 class Residence(models.Model):
     address_line_1 = models.CharField(max_length=100)
@@ -75,9 +77,11 @@ class Residence(models.Model):
     def get_absolute_url(self):
         return reverse('residences_detail', kwargs={'residence_id': self.id})
 
-    def
+    # def
     # class Meta:
     #     order = ['-date']
+
+# ---------------------- Workplace Model ---------------------------
 
 
 class Workplace(models.Model):
@@ -106,7 +110,9 @@ class Workplace(models.Model):
     # class Meta:
     #     order = ['-date']
 
-    # class FunPlace(models.Model):
+# ---------------------- Attractions Model(not MVP)---------------------------
+
+    # class Attractions(models.Model):
     #     address_line_1 = models.CharField(max_length=100)
     #     address_line_2 = models.CharField(max_length=100)
     #     city = models.CharField(max_length=50)
