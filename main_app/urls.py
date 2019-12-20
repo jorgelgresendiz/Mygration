@@ -11,8 +11,10 @@ urlpatterns = [
     path('residences/', views.residences_index,
          name='residences_index'),
     path('residences/<int:residence_id>/', views.residence_detail,
-         name='residences_detail'),
+         name='residence_detail'),
     path('residences/create/', views.ResidenceCreate.as_view(), name='create_residence'),
+    path('residences/<int:pk>/update/', views.ResidenceUpdate.as_view(), name='residence_update'),
+    path('residences/<int:pk>/delete/', views.ResidenceDelete.as_view(), name='residence_delete'),
 
     # Workplace routes ---------------------------------
     path('workplaces/', views.workplaces_index,
