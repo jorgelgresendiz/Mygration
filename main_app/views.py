@@ -18,12 +18,15 @@ def home(request):
 def create_form(request):
     return render(request, 'create_residences.html')
 
+def select_entry_form(request):
+    return render(request, 'select.html')
+
 # ---------------------- Residence Views -------------------------
 
 @login_required
 def residences_index(request):
     residence = Residence.objects.filter(user=request.user)
-    return render(request, 'residences/residences_index.html', {'residence': residence})
+    return render(request, 'residences/residences_index.html', {'residences': residence})
 
 
 @login_required
