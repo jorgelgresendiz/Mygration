@@ -65,7 +65,7 @@ class Residence(models.Model):
         max_length=2,
         choices=STATES
     )
-    # zipcode = models.CharField(max_length=50)
+    zipcode = models.CharField(max_length=50)
     latitude = models.FloatField()
     longitude = models.FloatField()
     start_date = models.DateField()
@@ -89,7 +89,7 @@ class Workplace(models.Model):
         max_length=2,
         choices=STATES
     )
-    # zipcode = models.CharField(max_length=50)
+    zipcode = models.CharField(max_length=50)
     latitude = models.FloatField()
     longitude = models.FloatField()
     company_name = models.CharField(max_length=100)
