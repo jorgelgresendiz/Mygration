@@ -73,7 +73,7 @@ class Residence(models.Model):
 
     # route to specific residence card
     def get_absolute_url(self):
-        return reverse('residences_detail', kwargs={'residence_id': self.id})
+        return reverse('residence_detail', kwargs={'residence_id': self.id})
 
     # def
     # class Meta:
