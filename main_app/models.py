@@ -75,6 +75,7 @@ class Residence(models.Model):
     def get_absolute_url(self):
         return reverse('residences_detail', kwargs={'residence_id': self.id})
 
+    def
     # class Meta:
     #     order = ['-date']
 
@@ -93,7 +94,7 @@ class Workplace(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     employer_name = models.CharField(max_length=50, blank=True)
-    employer_number = models.IntegerField(max_length=15, blank=True)
+    employer_number = models.CharField(max_length=50, blank=True)
     employer_email = models.CharField(max_length=50, blank=True)
     title = models.CharField(max_length=50, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
