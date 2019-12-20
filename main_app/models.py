@@ -75,8 +75,8 @@ class Residence(models.Model):
     def get_absolute_url(self):
         return reverse('residences_detail', kwargs={'residence_id': self.id})
 
-    class Meta:
-        order = ['-date']
+    # class Meta:
+    #     order = ['-date']
 
 
 class Workplace(models.Model):
@@ -102,8 +102,8 @@ class Workplace(models.Model):
     def get_absolute_url(self):
         return reverse('workplaces_detail', kwargs={'workplace_id': self.id})
 
-    class Meta:
-        order = ['-date']
+    # class Meta:
+    #     order = ['-date']
 
     # class FunPlace(models.Model):
     #     address_line_1 = models.CharField(max_length=100)
