@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 
@@ -58,7 +59,7 @@ STATES = (
 
 class Residence(models.Model):
     address_line_1 = models.CharField(max_length=100)
-    address_line_2 = models.CharField(max_length=100)
+    address_line_2 = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=50)
     state = models.CharField(
         max_length=2,
@@ -70,10 +71,17 @@ class Residence(models.Model):
     end_date = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    # route to specific residence card
+    def get_absolute_url(self):
+        return reverse('residences_detail', kwargs={'residence_id': self.id})
+
+    class Meta:
+        order = ['-date']
+
 
 class Workplace(models.Model):
     address_line_1 = models.CharField(max_length=100)
-    address_line_2 = models.CharField(max_length=100)
+    address_line_2 = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=50)
     state = models.CharField(
         max_length=2,
@@ -85,14 +93,21 @@ class Workplace(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     employer_name = models.CharField(max_length=50)
-    employer_number = models.IntegerField()
+    employer_number = models.IntegerField(max_length=, blank=True)
     employer_email = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-# class FunPlace(models.Model):
-#     address_line_1 = models.CharField(max_length=100)
-#     address_line_2 = models.CharField(max_length=100)
-#     city = models.CharField(max_length=50)
-#     latitude = models.FloatField()
-#     longitude = models.FloatField()
+    # route to specific workplace card
+    def get_absolute_url(self):
+        return reverse('workplaces_detail', kwargs={'workplace_id': self.id})
+
+    class Meta:
+        order = ['-date']
+
+    # class FunPlace(models.Model):
+    #     address_line_1 = models.CharField(max_length=100)
+    #     address_line_2 = models.CharField(max_length=100)
+    #     city = models.CharField(max_length=50)
+    #     latitude = models.FloatField()
+    #     longitude = models.FloatField()
