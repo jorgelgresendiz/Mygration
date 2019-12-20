@@ -75,7 +75,7 @@ class Residence(models.Model):
     def get_absolute_url(self):
         return reverse('residences_detail', kwargs={'residence_id': self.id})
 
-    def
+    # def
     # class Meta:
     #     order = ['-date']
 
