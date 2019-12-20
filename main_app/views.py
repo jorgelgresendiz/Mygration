@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -62,6 +62,38 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
         form.instance.start_date = start_date
         form.instance.end_date = end_date
         return super().form_valid(form)
+    
+class ResidenceUpdate(LoginRequiredMixin, UpdateView):
+    model = Residence
+    fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date']
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        street_1 = form.instance.address_line_1
+        street_1_formatted = street_1.replace(' ', '%20')
+        street_2 = form.instance.address_line_2
+        start_date = form.instance.start_date
+        end_date = form.instance.end_date
+        city = form.instance.city
+        state = form.instance.state
+        request_string = f"https://us-street.api.smartystreets.com/street-address?auth-id={os.environ['SS_AUTH_ID']}&auth-token={os.environ['SS_AUTH_TOKEN']}&street={street_1_formatted}&street2=&city={city}&state={state}&zipcode=&address-type=us-street-components"
+        unparsed_formatted_address = requests.get(request_string)
+        parsed_formatted_address = json.loads(
+        unparsed_formatted_address.content)
+        form.instance.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
+        form.instance.address_line_2 = street_2
+        form.instance.city = parsed_formatted_address[0]['components']['city_name']
+        form.instance.state = parsed_formatted_address[0]['components']['state_abbreviation']
+        form.instance.latitude = parsed_formatted_address[0]['metadata']['latitude']
+        form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
+        form.instance.start_date = start_date
+        form.instance.end_date = end_date
+        return super().form_valid(form)
+
+
+class ResidenceDelete(LoginRequiredMixin, DeleteView):
+    model = Residence
+    success_url = '/residences/'
         
 
     
