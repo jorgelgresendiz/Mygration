@@ -18,7 +18,7 @@ urlpatterns = [
          name='workplaces_index'),
     path('workplaces/<int:workplace_id>/', views.workplace_detail,
          name='workplace_detail'),
-    path('workplaces/create/', views.create_workplace, name='create_workplace'),
+    path('workplaces/create/', views.WorkplaceCreate.as_view(), name='create_workplace'),
 
     # Auth routes --------------------------------------
     path('accounts/', include('django.contrib.auth.urls')),
