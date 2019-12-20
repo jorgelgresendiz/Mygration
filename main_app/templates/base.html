@@ -21,8 +21,8 @@
               <a href="/" class="brand-logo">Mygration</a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
-                  <li><a href="/residences/"">View Homes</a></li>
-                  <li><a href="/workplaces">View Work Places</a></li>
+                  <li><a href="{% url 'residences_index' %}">View Homes</a></li>
+                  <li><a href="{% url 'workplaces_index' %}">View Work Places</a></li>
                   <li><a href="{% url 'select_entry_form' %}">Add Place</a></li>
                   <li><a href="{% url 'logout' %}">Log Out</a></li>
                 {% else %}

@@ -6,6 +6,11 @@ nav {
     background-color:#191975;
 }
 
+.btn {
+    background-color:#9292e8;
+    margin: 10vh;
+}
+
 .brand-logo{
     font-family: 'Girassol', cursive;
     letter-spacing: .1em;
@@ -17,4 +22,9 @@ nav {
 
 main {
     margin: 5vh 20vh;
+}
+
+.center {
+    display: flex;
+    align-items: center;
 }
