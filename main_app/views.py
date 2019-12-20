@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -63,8 +63,12 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
         form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
         form.instance.start_date = start_date
         form.instance.end_date = end_date
-        print(form.data)
-        return super().form_valid(form)
+        if 'addnew' in form.data:
+            self.success_url = '/select_entry_form/'
+            return super().form_valid(form)
+        elif 'detail' in form.data:
+            return super().form_valid(form)
+
     
 class ResidenceUpdate(LoginRequiredMixin, UpdateView):
     model = Residence
@@ -142,7 +146,11 @@ class WorkplaceCreate(LoginRequiredMixin, CreateView):
         form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
         form.instance.start_date = start_date
         form.instance.end_date = end_date
-        return super().form_valid(form)
+        if 'addnew' in form.data:
+            self.success_url = '/select_entry_form/'
+            return super().form_valid(form)
+        elif 'detail' in form.data:
+            return super().form_valid(form)
     
     
 class WorkplaceUpdate(LoginRequiredMixin, UpdateView):
