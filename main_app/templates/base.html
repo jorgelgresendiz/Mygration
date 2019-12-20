@@ -22,7 +22,7 @@
                 {% if user.is_authenticated %}
                   <li><a href="/residences/"">View Homes</a></li>
                   <li><a href="/workplaces">View Work Places</a></li>
-                  <li><a href="/residences/create">Add Place</a></li>
+                  <li><a href="{% url 'select_entry_form' %}">Add Place</a></li>
                   <li><a href="{% url 'logout' %}">Log Out</a></li>
                 {% else %}
                 <li><a href="{% url 'signup' %}">Sign Up</a></li>

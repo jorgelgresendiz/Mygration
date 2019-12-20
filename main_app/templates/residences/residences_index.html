@@ -3,7 +3,7 @@
 <h1>Residences</h1>
 
 {% for residence in residences %}
-<a href="{% url 'detail' residence.id %}">
+<a href="{% url 'residence_detail' residence.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ residence.address_line_1 }}</span>
