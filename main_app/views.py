@@ -104,7 +104,7 @@ class ResidenceDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def workplaces_index(request):
     workplace = Workplace.objects.filter(user=request.user)
-    return render(request, 'workplaces/workplaces_index.html', {'workplace': workplace})
+    return render(request, 'workplaces/workplaces_index.html', {'workplaces': workplace})
 
 
 @login_required
