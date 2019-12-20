@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if object %}
+    <h1>Edit {{object.name}}</h1>
+{% else %}
+<h1>Add Residence</h1>
+{% endif %}
+<!-- Leaving the action empty makes the form post to the same url used to display it -->
+<form action="" method="post">
+<!-- Django requires the following for security purposes -->
+{% csrf_token %}
+<table>
+  <!-- Render the inputs inside of <tr>s & <td>s -->
+  {{ form.as_table }}
+</table>
+<input type="submit" value="Submit!" class="btn">
+</form>
+<script>
+  // create a datepicker
+  var dateEl = document.getElementById('id_start_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+
+  var dateEl = document.getElementById('id_end_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+
+  // initialize the meal select
+  var selectEl = document.getElementById('id_state');
+  M.FormSelect.init(selectEl);
+</script>
+{% endblock %}

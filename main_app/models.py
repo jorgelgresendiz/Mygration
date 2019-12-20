@@ -92,10 +92,10 @@ class Workplace(models.Model):
     company_name = models.CharField(max_length=100)
     start_date = models.DateField()
     end_date = models.DateField()
-    employer_name = models.CharField(max_length=50)
-    employer_number = models.IntegerField(max_length=, blank=True)
-    employer_email = models.CharField(max_length=50)
-    title = models.CharField(max_length=50)
+    employer_name = models.CharField(max_length=50, blank=True)
+    employer_number = models.IntegerField(max_length=15, blank=True)
+    employer_email = models.CharField(max_length=50, blank=True)
+    title = models.CharField(max_length=50, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # route to specific workplace card
