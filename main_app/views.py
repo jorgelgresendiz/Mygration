@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -38,7 +38,8 @@ def residence_detail(request, residence_id):
 
 class ResidenceCreate(LoginRequiredMixin, CreateView):
     model = Residence
-    fields = ['address_line_1', 'address_line_2', 'city', 'zipcode', 'state', 'start_date', 'end_date']
+    fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date']
+    success_url = '/residences/'
     
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -62,11 +63,16 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
         form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
         form.instance.start_date = start_date
         form.instance.end_date = end_date
-        return super().form_valid(form)
+        if 'addnew' in form.data:
+            self.success_url = '/select_entry_form/'
+            return super().form_valid(form)
+        elif 'detail' in form.data:
+            return super().form_valid(form)
+
     
 class ResidenceUpdate(LoginRequiredMixin, UpdateView):
     model = Residence
-    fields = ['address_line_1', 'address_line_2', 'city', 'zipcode', 'state', 'start_date', 'end_date']
+    fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date']
     
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -116,7 +122,7 @@ def workplace_detail(request, workplace_id):
    
 class WorkplaceCreate(LoginRequiredMixin, CreateView):
     model = Workplace
-    fields = ['address_line_1', 'address_line_2', 'zipcode', 'city', 'state', 'start_date', 'end_date', 'company_name', 'employer_name', 'employer_number', 'employer_email', 'title']
+    fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date', 'company_name', 'employer_name', 'employer_number', 'employer_email', 'title']
     
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -140,12 +146,16 @@ class WorkplaceCreate(LoginRequiredMixin, CreateView):
         form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
         form.instance.start_date = start_date
         form.instance.end_date = end_date
-        return super().form_valid(form)
+        if 'addnew' in form.data:
+            self.success_url = '/select_entry_form/'
+            return super().form_valid(form)
+        elif 'detail' in form.data:
+            return super().form_valid(form)
     
     
 class WorkplaceUpdate(LoginRequiredMixin, UpdateView):
     model = Workplace
-    fields = ['address_line_1', 'address_line_2', 'zipcode', 'city', 'state', 'start_date', 'end_date', 'company_name', 'employer_name', 'employer_number', 'employer_email', 'title']
+    fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date', 'company_name', 'employer_name', 'employer_number', 'employer_email', 'title']
     
     def form_valid(self, form):
         form.instance.user = self.request.user
