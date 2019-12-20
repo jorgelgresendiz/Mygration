@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<a href="{% url 'create_residence' %}">Add Residence</a>
-<a href="{% url 'create_workplace' %}">Add Work Place</a>
+<div class="center">
+    <a class="btn" href="{% url 'create_residence' %}">Add Residence</a>
+    <a class="btn" href="{% url 'create_workplace' %}">Add Work Place</a>
+</div>
 
 {% endblock %}
