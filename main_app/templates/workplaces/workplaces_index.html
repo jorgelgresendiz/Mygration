@@ -3,7 +3,7 @@
 <h1>Workplaces</h1>
 
 {% for workplace in workplaces %}
-<a href="{% url 'detail' workplace.id %}">
+<a href="{% url 'workplace_detail' workplace.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ workplace.company_name }}</span>
@@ -12,8 +12,8 @@
             <p>Dates: {{ workplace.start_date }}-{{ workplace.end_date }}</p>
             <p>Address: {{ workplace.address_line_1 }}, {{ workplace.address_line_2 }}</p>
             <p>City: {{ workplace.city }}</p>
-            <!-- <p>State: {{ workplace.state }}</p> -->
-            <!-- <p>Zip: {{ workplace.zip }}</p> -->
+            <p>State: {{ workplace.state }}</p>
+            <p>Zip: {{ workplace.zip }}</p>
             <p>Manager: {{ workplace.employer_name }}</p>
             <p>Manager Phone Number: {{ workplace.employer_number }}</p>
             <p>Manager e-mail: {{ workplace.employer_email }}</p>
