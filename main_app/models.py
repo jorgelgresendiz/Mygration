@@ -65,6 +65,7 @@ class Residence(models.Model):
         max_length=2,
         choices=STATES
     )
+    zipcode = models.CharField(max_length=50)
     latitude = models.FloatField()
     longitude = models.FloatField()
     start_date = models.DateField()
@@ -88,6 +89,7 @@ class Workplace(models.Model):
         max_length=2,
         choices=STATES
     )
+    zipcode = models.CharField(max_length=50)
     latitude = models.FloatField()
     longitude = models.FloatField()
     company_name = models.CharField(max_length=100)
@@ -101,7 +103,7 @@ class Workplace(models.Model):
 
     # route to specific workplace card
     def get_absolute_url(self):
-        return reverse('workplaces_detail', kwargs={'workplace_id': self.id})
+        return reverse('workplace_detail', kwargs={'workplace_id': self.id})
 
     # class Meta:
     #     order = ['-date']
