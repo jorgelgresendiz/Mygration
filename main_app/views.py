@@ -45,6 +45,10 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
     fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date']
     success_url = '/residences/'
     
+    def build_static_map_url(self, lat, long, key):
+        url = f'https://maps.googleapis.com/maps/api/staticmap?center={lat},{long}&zoom=13&size=600x300&maptype=roadmap&markers=color:purple%7Clabel:%7C{lat},{long}&key={key}'
+        return url
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
         street_1 = form.instance.address_line_1
@@ -70,6 +74,7 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
         form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
         form.instance.start_date = start_date
         form.instance.end_date = end_date
+        form.instance.static_map_url = self.build_static_map_url(form.instance.latitude, form.instance.longitude, os.environ['STATIC_MAPS_KEY'])
         if 'addnew' in form.data:
             self.success_url = '/select_entry_form/'
             return super().form_valid(form)
