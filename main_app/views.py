@@ -94,6 +94,9 @@ class ResidenceUpdate(LoginRequiredMixin, UpdateView):
         unparsed_formatted_address = requests.get(request_string)
         parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
+        if len(parsed_formatted_address) < 1:
+            print('invalid address')
+            return redirect('invalid_address')
         form.instance.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
         form.instance.address_line_2 = street_2
         form.instance.city = parsed_formatted_address[0]['components']['city_name']
@@ -181,6 +184,9 @@ class WorkplaceUpdate(LoginRequiredMixin, UpdateView):
         unparsed_formatted_address = requests.get(request_string)
         parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
+        if len(parsed_formatted_address) < 1:
+            print('invalid address')
+            return redirect('invalid_address')
         form.instance.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
         form.instance.address_line_2 = street_2
         form.instance.city = parsed_formatted_address[0]['components']['city_name']
