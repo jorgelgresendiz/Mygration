@@ -65,7 +65,8 @@ class Residence(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(
         max_length=2,
-        choices=STATES
+        choices=STATES,
+        blank=True
     )
     zipcode = models.CharField(max_length=50)
     latitude = models.FloatField()
@@ -91,7 +92,8 @@ class Workplace(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(
         max_length=2,
-        choices=STATES
+        choices=STATES,
+        blank=True
     )
     zipcode = models.CharField(max_length=50)
     latitude = models.FloatField()
