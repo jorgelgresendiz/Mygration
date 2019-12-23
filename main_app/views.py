@@ -49,6 +49,10 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
         url = f'https://maps.googleapis.com/maps/api/staticmap?center={lat},{long}&zoom=13&size=600x300&maptype=roadmap&markers=color:purple%7Clabel:%7C{lat},{long}&key={key}'
         return url
     
+    def build_static_streetview_url(self, lat, long, key):
+        url = f'https://maps.googleapis.com/maps/api/streetview?size=600x300&location={lat},{long}&heading=&pitch=0&key={key}'
+        return url
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
         street_1 = form.instance.address_line_1
@@ -75,6 +79,7 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
         form.instance.start_date = start_date
         form.instance.end_date = end_date
         form.instance.static_map_url = self.build_static_map_url(form.instance.latitude, form.instance.longitude, os.environ['STATIC_MAPS_KEY'])
+        form.instance.static_streetview_url = self.build_static_streetview_url(form.instance.latitude, form.instance.longitude, os.environ['STREETVIEW_KEY'])
         if 'addnew' in form.data:
             self.success_url = '/select_entry_form/'
             return super().form_valid(form)
@@ -85,6 +90,14 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
 class ResidenceUpdate(LoginRequiredMixin, UpdateView):
     model = Residence
     fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date']
+    
+    def build_static_map_url(self, lat, long, key):
+        url = f'https://maps.googleapis.com/maps/api/staticmap?center={lat},{long}&zoom=13&size=600x300&maptype=roadmap&markers=color:purple%7Clabel:%7C{lat},{long}&key={key}'
+        return url
+    
+    def build_static_streetview_url(self, lat, long, key):
+        url = f'https://maps.googleapis.com/maps/api/streetview?size=600x300&location={lat},{long}&heading=&pitch=0&key={key}'
+        return url
     
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -111,6 +124,8 @@ class ResidenceUpdate(LoginRequiredMixin, UpdateView):
         form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
         form.instance.start_date = start_date
         form.instance.end_date = end_date
+        form.instance.static_map_url = self.build_static_map_url(form.instance.latitude, form.instance.longitude, os.environ['STATIC_MAPS_KEY'])        
+        form.instance.static_streetview_url = self.build_static_streetview_url(form.instance.latitude, form.instance.longitude, os.environ['STREETVIEW_KEY'])
         return super().form_valid(form)
 
 
@@ -140,6 +155,14 @@ class WorkplaceCreate(LoginRequiredMixin, CreateView):
     fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date', 'company_name', 'employer_name', 'employer_number', 'employer_email', 'title']
     success_url = '/workplaces/'
     
+    def build_static_map_url(self, lat, long, key):
+        url = f'https://maps.googleapis.com/maps/api/staticmap?center={lat},{long}&zoom=13&size=600x300&maptype=roadmap&markers=color:purple%7Clabel:%7C{lat},{long}&key={key}'
+        return url
+    
+    def build_static_streetview_url(self, lat, long, key):
+        url = f'https://maps.googleapis.com/maps/api/streetview?size=600x300&location={lat},{long}&heading=&pitch=0&key={key}'
+        return url
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
         street_1 = form.instance.address_line_1
@@ -165,6 +188,8 @@ class WorkplaceCreate(LoginRequiredMixin, CreateView):
         form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
         form.instance.start_date = start_date
         form.instance.end_date = end_date
+        form.instance.static_map_url = self.build_static_map_url(form.instance.latitude, form.instance.longitude, os.environ['STATIC_MAPS_KEY'])        
+        form.instance.static_streetview_url = self.build_static_streetview_url(form.instance.latitude, form.instance.longitude, os.environ['STREETVIEW_KEY'])
         if 'addnew' in form.data:
             self.success_url = '/select_entry_form/'
             return super().form_valid(form)
@@ -176,6 +201,14 @@ class WorkplaceUpdate(LoginRequiredMixin, UpdateView):
     model = Workplace
     fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date', 'company_name', 'employer_name', 'employer_number', 'employer_email', 'title']
     
+    def build_static_map_url(self, lat, long, key):
+        url = f'https://maps.googleapis.com/maps/api/staticmap?center={lat},{long}&zoom=13&size=600x300&maptype=roadmap&markers=color:purple%7Clabel:%7C{lat},{long}&key={key}'
+        return url
+    
+    def build_static_streetview_url(self, lat, long, key):
+        url = f'https://maps.googleapis.com/maps/api/streetview?size=600x300&location={lat},{long}&heading=&pitch=0&key={key}'
+        return url
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         street_1 = form.instance.address_line_1
@@ -201,6 +234,8 @@ class WorkplaceUpdate(LoginRequiredMixin, UpdateView):
         form.instance.longitude = parsed_formatted_address[0]['metadata']['longitude']
         form.instance.start_date = start_date
         form.instance.end_date = end_date
+        form.instance.static_map_url = self.build_static_map_url(form.instance.latitude, form.instance.longitude, os.environ['STATIC_MAPS_KEY'])        
+        form.instance.static_streetview_url = self.build_static_streetview_url(form.instance.latitude, form.instance.longitude, os.environ['STREETVIEW_KEY'])
         return super().form_valid(form)
 
 class WorkplaceDelete(LoginRequiredMixin, DeleteView):
