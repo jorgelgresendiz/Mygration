@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -20,6 +21,9 @@ def create_form(request):
 
 def select_entry_form(request):
     return render(request, 'select.html')
+
+def invalid_address(request):
+    return render(request, 'invalid_address.html')
 
 # ---------------------- Residence Views -------------------------
 
@@ -54,6 +58,9 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
         unparsed_formatted_address = requests.get(request_string)
         parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
+        if len(parsed_formatted_address) < 1:
+            print('invalid address')
+            return redirect('invalid_address')
         form.instance.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
         form.instance.address_line_2 = street_2
         form.instance.city = parsed_formatted_address[0]['components']['city_name']
@@ -87,6 +94,9 @@ class ResidenceUpdate(LoginRequiredMixin, UpdateView):
         unparsed_formatted_address = requests.get(request_string)
         parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
+        if len(parsed_formatted_address) < 1:
+            print('invalid address')
+            return redirect('invalid_address')
         form.instance.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
         form.instance.address_line_2 = street_2
         form.instance.city = parsed_formatted_address[0]['components']['city_name']
@@ -123,6 +133,7 @@ def workplace_detail(request, workplace_id):
 class WorkplaceCreate(LoginRequiredMixin, CreateView):
     model = Workplace
     fields = ['address_line_1', 'address_line_2', 'city', 'state', 'start_date', 'end_date', 'company_name', 'employer_name', 'employer_number', 'employer_email', 'title']
+    success_url = '/workplaces/'
     
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -137,6 +148,9 @@ class WorkplaceCreate(LoginRequiredMixin, CreateView):
         unparsed_formatted_address = requests.get(request_string)
         parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
+        if len(parsed_formatted_address) < 1:
+            print('invalid address')
+            return redirect('invalid_address')
         form.instance.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
         form.instance.address_line_2 = street_2
         form.instance.city = parsed_formatted_address[0]['components']['city_name']
@@ -170,6 +184,9 @@ class WorkplaceUpdate(LoginRequiredMixin, UpdateView):
         unparsed_formatted_address = requests.get(request_string)
         parsed_formatted_address = json.loads(
         unparsed_formatted_address.content)
+        if len(parsed_formatted_address) < 1:
+            print('invalid address')
+            return redirect('invalid_address')
         form.instance.address_line_1 = parsed_formatted_address[0]['delivery_line_1']
         form.instance.address_line_2 = street_2
         form.instance.city = parsed_formatted_address[0]['components']['city_name']

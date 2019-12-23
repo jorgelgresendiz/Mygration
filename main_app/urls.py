@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('select_entry_form/', views.select_entry_form, name='select_entry_form'),
     path('residences/create_form/', views.create_form, name='create_form'), # renders create form
+    path('invalid_address/', views.invalid_address, name='invalid_address'),
 
     # Residence routes ---------------------------------
     path('residences/', views.residences_index,
