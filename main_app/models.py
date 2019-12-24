@@ -58,7 +58,6 @@ STATES = (
 
 
 class Residence(models.Model):
-    test = models.TextField()
     address_line_1 = models.CharField(max_length=100)
     address_line_2 = models.CharField(max_length=100, blank=True)
     static_map_url = models.TextField()
