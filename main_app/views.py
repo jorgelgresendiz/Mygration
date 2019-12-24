@@ -80,6 +80,8 @@ class ResidenceCreate(LoginRequiredMixin, CreateView):
         form.instance.end_date = end_date
         form.instance.static_map_url = self.build_static_map_url(form.instance.latitude, form.instance.longitude, os.environ['STATIC_MAPS_KEY'])
         form.instance.static_streetview_url = self.build_static_streetview_url(form.instance.latitude, form.instance.longitude, os.environ['STREETVIEW_KEY'])
+        print(form.instance.static_map_url)
+        print(form.instance.static_streetview_url)
         if 'addnew' in form.data:
             self.success_url = '/select_entry_form/'
             return super().form_valid(form)
