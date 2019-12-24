@@ -60,8 +60,8 @@ STATES = (
 class Residence(models.Model):
     address_line_1 = models.CharField(max_length=100)
     address_line_2 = models.CharField(max_length=100, blank=True)
-    static_map_url = models.CharField(),
-    static_streetview_url = models.CharField(),
+    static_map_url = models.TextField(),
+    static_streetview_url = models.TextField,
     city = models.CharField(max_length=50)
     state = models.CharField(
         max_length=2,
@@ -87,8 +87,8 @@ class Residence(models.Model):
 class Workplace(models.Model):
     address_line_1 = models.CharField(max_length=100)
     address_line_2 = models.CharField(max_length=100, blank=True)
-    static_map_url = models.CharField(),
-    static_streetview_url = models.CharField(),
+    static_map_url = models.TextField(),
+    static_streetview_url = models.TextField(),
     city = models.CharField(max_length=50)
     state = models.CharField(
         max_length=2,
