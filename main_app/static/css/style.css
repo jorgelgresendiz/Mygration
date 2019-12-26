@@ -3,11 +3,11 @@
 } */
 
 nav {
-    background-color:#191975;
+    background-color:#120C59;
 }
 
 .btn {
-    background-color:#9292e8;
+    background-color:#EB6E50;
     margin: 10vh;
 }
 
@@ -27,4 +27,8 @@ main {
 .center {
     display: flex;
     justify-content: center;
+}
+
+#mygration-logo{
+    height: 100px;
 }
