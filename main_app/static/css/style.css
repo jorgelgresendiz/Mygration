@@ -17,7 +17,7 @@ nav {
 }
 
 .nav-wrapper {
-    margin: 0 5vh
+    margin: 0 5vh;
 }
 
 main {
@@ -30,5 +30,6 @@ main {
 }
 
 #mygration-logo{
-    height: 100px;
+    height: 50px;
+    margin: 9px;
 }
