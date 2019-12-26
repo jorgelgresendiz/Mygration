@@ -12,13 +12,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Girassol|PT+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">    
+    <link rel="icon" href="../static/img/mygration_logo_transparent.png">
     <title>Mygration</title>
 </head>
 <body>
       <header>
         <nav>
             <div class="nav-wrapper">
-              <a href="/" class="brand-logo">Mygration</a>
+              <a href="/" class="brand-logo"><img id = "mygration-logo" alt="Mygration" src="../static/img/mygration_wordmark_transparent.png"></a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
                   <li><a href="{% url 'residences_index' %}">View Homes</a></li>
