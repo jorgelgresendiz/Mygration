@@ -33,3 +33,11 @@ main {
     height: 50px;
     margin: 9px;
 }
+
+.map, .streetview{
+    width: 49.8%;
+}
+
+a {
+    color: #000000;
+}
