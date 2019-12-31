@@ -20,6 +20,19 @@ main {
     margin: 5vh 20vh;
 }
 
+@media (max-width: 1024px) {
+    main{
+        margin: 10vh;
+    }
+}
+
+@media (max-width: 420px) {
+    main{
+        margin: 5vh 5vh;
+    }
+}
+
+
 .center {
     display: flex;
     justify-content: center;
@@ -31,7 +44,7 @@ main {
 }
 
 .map, .streetview{
-    width: 49.8%;
+    width: 49%;
 }
 
 a {
