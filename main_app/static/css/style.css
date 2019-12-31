@@ -20,17 +20,6 @@ main {
     margin: 5vh 20vh;
 }
 
-@media (max-width: 1024px) {
-    main{
-        margin: 10vh;
-    }
-}
-
-@media (max-width: 420px) {
-    main{
-        margin: 5vh 5vh;
-    }
-}
 
 
 .center {
@@ -49,4 +38,26 @@ main {
 
 a {
     color: #000000;
+}
+
+@media (max-width: 1024px) {
+    main{
+        margin: 10vh;
+    }
+    .btn{
+        margin: 2vh;
+    }
+}
+
+@media (max-width: 420px) {
+    main{
+        margin: 5vh 5vh;
+    }
+    .btn{
+        margin: 1vh;
+    }
+    #mygration-logo{
+        height: 35px;
+        margin: 4px;
+    }
 }
