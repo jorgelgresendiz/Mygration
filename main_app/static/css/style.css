@@ -1,19 +1,15 @@
-/* body {
-    font-family: 'PT Sans', sans-serif;
-} */
+body {
+    font-family: 'Roboto', sans-serif;
+}
 
-nav {
+nav, .nav-link{
     background-color:#120C59;
+    color: #ffffff;
 }
 
 .btn {
     background-color:#EB6E50;
     margin: 10vh;
-}
-
-.brand-logo{
-    font-family: 'Girassol', cursive;
-    letter-spacing: .1em;
 }
 
 .nav-wrapper {
