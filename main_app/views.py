@@ -17,7 +17,7 @@ import json
 def home(request):
     if request.user.is_authenticated:
         residences = serializers.serialize(
-            "json", Residence.objects.filter(user=request.user).order_by('-end_date'))
+            "json", Residence.objects.filter(user=request.user).order_by('end_date'))
         test_data = json.loads(residences)
         return render(request, 'index.html', {'residences': test_data})
     else:
