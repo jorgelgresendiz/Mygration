@@ -17,7 +17,7 @@ import json
 def home(request):
     if request.user.is_authenticated:
         residences = serializers.serialize(
-            "json", Residence.objects.filter(user=request.user))
+            "json", Residence.objects.filter(user=request.user).order_by('-end_date'))
         test_data = json.loads(residences)
         return render(request, 'index.html', {'residences': test_data})
     else:
@@ -40,7 +40,8 @@ def invalid_address(request):
 
 @login_required
 def residences_index(request):
-    residence = Residence.objects.filter(user=request.user)
+    residence = Residence.objects.filter(
+        user=request.user).order_by('-end_date')
     return render(request, 'residences/residences_index.html', {'residences': residence})
 
 
@@ -157,7 +158,8 @@ class ResidenceDelete(LoginRequiredMixin, DeleteView):
 
 @login_required
 def workplaces_index(request):
-    workplace = Workplace.objects.filter(user=request.user)
+    workplace = Workplace.objects.filter(
+        user=request.user).order_by('-end_date')
     return render(request, 'workplaces/workplaces_index.html', {'workplaces': workplace})
 
 
