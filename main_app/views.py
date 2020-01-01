@@ -19,7 +19,7 @@ def home(request):
         residences = serializers.serialize(
             "json", Residence.objects.filter(user=request.user).order_by('end_date'))
         test_data = json.loads(residences)
-        return render(request, 'index.html', {'residences': test_data})
+        return render(request, 'index.html', {'residences': test_data, 'DIRECTIONS_KEY': os.environ['DIRECTIONS_KEY']})
     else:
         return render(request, 'index.html')
 
