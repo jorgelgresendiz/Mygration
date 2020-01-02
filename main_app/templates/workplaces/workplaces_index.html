@@ -4,7 +4,7 @@
 
 {% for workplace in workplaces %}
 <a href="{% url 'workplace_detail' workplace.id %}">
-    <div class="card">
+    <div class="card ">
         <div class="card-img-top">
             <img class = "streetview" src="{{ workplace.static_streetview_url }}" alt="{{ workplace.address_line_1 }} Photo">
             <img class ="map float-right" src="{{ workplace.static_map_url }}" alt="{{ workplace.address_line_1 }} Map View">  

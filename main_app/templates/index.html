@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Home Page</h1>
+{% if user.is_authenticated %}
+<h1>Your Journey</h1>
+{% else %}
+<h1>Your Journey... is Ready to be Recorded</h1>
+{% endif %}
 <hr />
 {% if user.is_authenticated %}
 <div id="map"></div>
@@ -33,7 +37,7 @@
             origin: waypts[0].location,
             destination: waypts[waypts.length - 1].location,
             waypoints: waypts,
-            optimizeWaypoints: true,
+            optimizeWaypoints: false,
             travelMode: 'DRIVING'
         }, function (response, status) {
             if (status === 'OK') {
@@ -45,5 +49,6 @@
         });
     }
 </script>
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{DIRECTIONS_KEY}}&callback=initMap">
+</script>
 {% endblock %}
