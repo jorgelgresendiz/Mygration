@@ -5,29 +5,29 @@
     <img class = "streetview" src="{{ workplace.static_streetview_url }}" alt="{{ workplace.address_line_1 }} Photo">
     <img class ="map float-right" src="{{ workplace.static_map_url }}" alt="{{ workplace.address_line_1 }} Map View">  
 </div>
-    <div class="card-content">
-      <span class="card-title">{{ workplace.company_name }}</span>
+    <div class="card-body">
+      <h5 class="card-title">{{ workplace.company_name }}</span>
       {% if workplace.title %}     
-        <p>Title: {{ workplace.title }}</p>
+        <p class="card-text mb-0">Title: {{ workplace.title }}</p>
       {% endif %}
-      <p>Dates: {{ workplace.start_date }}-{{ workplace.end_date }}</p>
-      <p>Address: {{ workplace.address_line_1 }}, {{ workplace.address_line_2 }}</p>
-      <p>City: {{ workplace.city }}</p>
-      <p>State: {{ workplace.state }}</p>
-      <p>Zip: {{ workplace.zipcode }}</p>
+      <p class="card-text mb-0">Dates: {{ workplace.start_date }}-{{ workplace.end_date }}</p>
+      <p class="card-text mb-0">Address: {{ workplace.address_line_1 }}, {{ workplace.address_line_2 }}</p>
+      <p class="card-text mb-0">City: {{ workplace.city }}</p>
+      <p class="card-text mb-0">State: {{ workplace.state }}</p>
+      <p class="card-text mb-0">Zip: {{ workplace.zipcode }}</p>
       {% if workplace.employer_name %}
-        <p>Manager: {{ workplace.employer_name }}</p>
+        <p class="card-text mb-0">Manager: {{ workplace.employer_name }}</p>
       {% endif %}
       {% if workplace.employer_number %}
-        <p>Manager Phone Number: {{ workplace.employer_number }}</p>
+        <p class="card-text mb-0">Manager Phone Number: {{ workplace.employer_number }}</p>
       {% endif %}
       {% if workplace.employer_email %}
-        <p>Manager e-mail: {{ workplace.employer_email }}</p>
+        <p class="card-text mb-0">Manager e-mail: {{ workplace.employer_email }}</p>
       {% endif %}
       </div>
     <div class="card-action">
-      <a href="{% url 'workplace_update' workplace.id %}">Edit</a>
-      <a href="{% url 'workplace_delete' workplace.id %}">Delete</a>
+      <a class="btn" href="{% url 'workplace_update' workplace.id %}">Edit</a>
+      <a class="btn" href="{% url 'workplace_delete' workplace.id %}">Delete</a>
     </div>
   </div>
 

@@ -9,7 +9,7 @@ nav, .nav-link{
 
 .btn {
     background-color:#EB6E50;
-    margin: 10vh;
+    margin: 4vh;
 }
 
 .nav-wrapper {
@@ -67,4 +67,8 @@ a {
         height: 35px;
         margin: 4px;
     }
+}
+
+.photo-size{
+    width: 50%;
 }
