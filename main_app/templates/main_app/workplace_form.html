@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 {% if object %}
     <h1>Edit {{object.name}}</h1>
@@ -9,10 +10,8 @@
 <form action="" method="post">
 <!-- Django requires the following for security purposes -->
 {% csrf_token %}
-<table>
-  <!-- Render the inputs inside of <tr>s & <td>s -->
-  {{ form.as_table }}
-</table>
+{{ form|crispy }}
+
 <div class = "center">
   <input type="submit" value="Save" name="detail" class="btn">
   <input type="submit" value="Save and Create Another" name="addnew" class="btn">

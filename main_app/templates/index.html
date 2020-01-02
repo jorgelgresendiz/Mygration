@@ -1,8 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <h1>Home Page</h1>
 <hr />
-<p>We will display an awesome map here!</p>
+{% if user.is_authenticated %}
+<div id="map"></div>
+{% endif %}
+<script>
+    residences = "{{ residences | escapejs}}"
+    residences = residences.replace(/'/g, '"');
+    residencesObj = JSON.parse(residences)
+    function initMap() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsRenderer = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: { lat: 41.85, lng: -97.65 }
+        });
+        directionsRenderer.setMap(map);
+        calculateAndDisplayRoute(directionsService, directionsRenderer);
+    }
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        var waypts = [];
+        residencesObj.forEach(function (residence) {
+            waypts.push(
+                {
+                    location: `${residence.fields.latitude},${residence.fields.longitude}`,
+                    stopover: true
+                }
+            );
+        })
+        directionsService.route({
+            origin: waypts[0].location,
+            destination: waypts[waypts.length - 1].location,
+            waypoints: waypts,
+            optimizeWaypoints: true,
+            travelMode: 'DRIVING'
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsRenderer.setDirections(response);
+                var route = response.routes[0];
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+</script>
 
 {% endblock %}

@@ -5,18 +5,29 @@
 {% for workplace in workplaces %}
 <a href="{% url 'workplace_detail' workplace.id %}">
     <div class="card">
+        <div class="card-img-top">
+            <img class = "streetview" src="{{ workplace.static_streetview_url }}" alt="{{ workplace.address_line_1 }} Photo">
+            <img class ="map float-right" src="{{ workplace.static_map_url }}" alt="{{ workplace.address_line_1 }} Map View">  
+        </div>
         <div class="card-content">
             <span class="card-title">{{ workplace.company_name }}</span>
-            <!-- photo img code goes here -->
-            <p>Title: {{ workplace.title }}</p>
+            {% if workplace.title %}     
+                <p>Title: {{ workplace.title }}</p>
+            {% endif %}
             <p>Dates: {{ workplace.start_date }}-{{ workplace.end_date }}</p>
             <p>Address: {{ workplace.address_line_1 }}, {{ workplace.address_line_2 }}</p>
             <p>City: {{ workplace.city }}</p>
             <p>State: {{ workplace.state }}</p>
-            <p>Zip: {{ workplace.zip }}</p>
-            <p>Manager: {{ workplace.employer_name }}</p>
-            <p>Manager Phone Number: {{ workplace.employer_number }}</p>
-            <p>Manager e-mail: {{ workplace.employer_email }}</p>
+            <p>Zip: {{ workplace.zipcode }}</p>
+            {% if workplace.employer_name %}
+                <p>Manager: {{ workplace.employer_name }}</p>
+            {% endif %}
+            {% if workplace.employer_number %}
+                <p>Manager Phone Number: {{ workplace.employer_number }}</p>
+            {% endif %}
+            {% if workplace.employer_email %}
+                <p>Manager e-mail: {{ workplace.employer_email }}</p>
+            {% endif %}
         </div>
     </div>
   </a>
